@@ -7,6 +7,7 @@
 //   comp);
 
 #include <algorithm>
+#include <deque>
 #include <iostream>
 #include <list>
 #include <string>
@@ -29,19 +30,25 @@ int main(int argc, char **argv) {
     std::cout << x << ",";
   }
 
-  std::cout << std::endl;
+  std::cout << "========" << std::endl;
 
-  std::list<int> list({1, 2, 5, 7, 2, 3, 99, 12});
-  list.sort();
-  for (auto &x : list) {
+  // deque
+  std::deque<int> dq;
+  dq.push_back(1);
+  dq.pop_front();
+  dq.push_front(2);
+  dq.pop_back();
+
+  dq.assign({2, 3, 1, 5, 7, 6, 99, 12, 32, 24});
+  std::sort(dq.begin(), dq.end());
+  for (auto &x : dq) {
     std::cout << x << ",";
   }
 
-  std::cout << std::endl;
-  list.sort(std::greater<std::list<int>::value_type>());
-  for (auto &x : list) {
+  std::cout << "========" << std::endl;
+  std::sort(dq.begin(), dq.end(), std::greater<int>());
+  for (auto &x : dq) {
     std::cout << x << ",";
   }
-
   return 0;
 }
