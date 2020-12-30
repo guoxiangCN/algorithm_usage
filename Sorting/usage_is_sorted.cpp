@@ -53,8 +53,17 @@ int main(int argc, char **argv) {
   std::map<std::string, std::uint64_t> scoreMap;
   scoreMap.insert(std::make_pair("aaa", 123));
   scoreMap.insert(std::make_pair("bbb", 444));
-
   ASSERT(std::is_sorted(scoreMap.begin(), scoreMap.end()));
+
+  // 7. try std::unordered_set
+  // std::unordered_set<int> tmp;
+  // std::hash<int>()(6);
+  std::unordered_set<int> uset(sortedArray, sortedArray + 6, 2);
+  // ASSERT(std::is_sorted(uset.begin(), uset.end())); // false
+  for (auto &x : uset) {
+    std::cout << x;
+  }
+  std::cout << std::endl;
 
   std::cout << "All Done" << std::endl;
   return 0;
