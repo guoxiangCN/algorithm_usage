@@ -1,6 +1,8 @@
 #ifndef __MY_ALGORITHM_LIKE_STL__
 #define __MY_ALGORITHM_LIKE_STL__
 
+#include <type_traits>
+
 namespace my {
 // std::min
 // std::max
@@ -23,6 +25,21 @@ OutputIterator copy_if(InputIterator first, InputIterator last,
       output++;
     }
     first++;
+  }
+  return output;
+}
+
+template <typename InputIterator, typename SizeType, typename OutputIterator>
+OutputIterator copy_n(
+    InputIterator input,
+    // typename std::enable_if<std::is_integral<SizeType>::value,SizeType>::type
+    // n, CANNOT INFER TYPE
+    SizeType n, OutputIterator output) {
+  while (n > 0) {
+    *output = *input;
+    input++;
+    output++;
+    n--;
   }
   return output;
 }
