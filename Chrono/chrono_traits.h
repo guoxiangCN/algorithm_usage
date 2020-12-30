@@ -5,6 +5,7 @@
 #include <type_traits>
 
 template <typename T> struct is_duration : std::false_type {};
+template <typename T> struct is_duration<T *> : std::false_type {};
 
 template <typename Rep, typename Period>
 struct is_duration<std::chrono::duration<Rep, Period> /**/> : std::true_type {};
