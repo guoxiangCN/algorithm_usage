@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+// stable_sort内部实现是归并排序，sort是快速排序
+
 // template <class RandomAccessIterator>
 //   void stable_sort ( RandomAccessIterator first, RandomAccessIterator last );
 
