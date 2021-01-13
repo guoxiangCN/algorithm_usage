@@ -48,9 +48,22 @@ void selectSort(std::vector<T> &array)
 }
 
 template <typename T, typename _Compare>
+void insertSort(std::vector<T> &array, _Compare compare)
+{
+    size_t size = array.size();
+    if (size <= 1)
+        return;
+    for (size_t i = 1; i < size; i++)
+    {
+        for (size_t j = 0; j < i; j++)
+        {
+        }
+    }
+}
+
+template <typename T, typename _Compare>
 void __quickSort(std::vector<T> &array, _Compare compare)
 {
-    
 }
 
 template <typename T, typename _Compare>
@@ -67,4 +80,5 @@ template <typename T, typename _Compare>
 void heapSort(std::vector<T> &array, _Compare compare)
 {
 }
+
 #endif
