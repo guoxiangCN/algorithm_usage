@@ -68,6 +68,14 @@
         "deque": "cpp",
         "forward_list": "cpp",
         "numeric": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "clocale": "cpp",
+        "strstream": "cpp",
+        "*.tcc": "cpp",
+        "fstream": "cpp",
+        "iomanip": "cpp",
+        "cfenv": "cpp",
+        "cinttypes": "cpp",
+        "typeindex": "cpp"
     }
 }
