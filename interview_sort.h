@@ -1,5 +1,5 @@
-#ifndef __BYTEDANCE_SORT_ALL_H__
-#define __BYTEDANCE_SORT_ALL_H__
+#ifndef __SORT_H__
+#define __SORT_H__
 
 #include <vector>    // use vector instead of array.
 #include <cstddef>   // just for std::size_t
@@ -80,7 +80,7 @@ void insertSort(std::vector<T> &array)
 template <typename T, typename _Compare>
 size_t __quickSortPartition(std::vector<T> &array, _Compare compare, size_t first, size_t last)
 {
-    T &pivot = array[first];
+    T pivot = array[first];
     while (first < last)
     {
         while (first < last && !compare(array[last], pivot)) // last >= pivot
@@ -91,13 +91,10 @@ size_t __quickSortPartition(std::vector<T> &array, _Compare compare, size_t firs
         array[first] = array[last];
 
         while (
-            first < last && 
-            (   
-                compare(array[first], pivot) 
-                ||
-                ( !compare(array[first], pivot) && !compare(pivot, array[first]))   // a<b=false && b<a=false 则代表a==b
-            )
-        ) 
+            first < last &&
+            (compare(array[first], pivot) ||
+             (!compare(array[first], pivot) && !compare(pivot, array[first])) // a<b=false && b<a=false 则代表a==b
+             ))
         {
             first++;
         }
