@@ -1,14 +1,21 @@
-#include "interview_sort.h"
+
 #include <iostream>
 #include <algorithm>
+
+#include "sort_bubbo.h"
+#include "sort_insert.h"
+#include "sort_select.h"
+#include "sort_quick.h"
+#include "sort_merge.h"
+#include "sort_heap.h"
 
 void test()
 {
     std::vector<int> arr = {13, 12, 55, 32, 77, 123, 1, 3, -1, 777, 90};
-    quickSort(arr);
+    heapSort(arr, std::less<int>());
 
     std::for_each(arr.begin(), arr.end(), [](int x) -> void {
-        std::cout << x << std::endl;
+        std::cout << x << ",";
     });
 
     // bubboSort(arr);
