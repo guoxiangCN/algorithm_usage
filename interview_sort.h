@@ -77,66 +77,99 @@ void insertSort(std::vector<T> &array)
 }
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-template <typename T, typename _Compare>
-size_t __quickSortPartition(std::vector<T> &array, _Compare compare, size_t first, size_t last)
+template <typename T, typename Compare>
+void quickSortPartition(std::vector<T> &arr, Compare compare, int left, int right)
 {
-    T pivot = array[first];
-    while (first < last)
+    if(left >= right) return;
+
+    size_t savedLeft = left;
+    size_t savedRight = right;
+
+    T pivot = arr[left];
+    while(left < right)
     {
-        while (first < last && !compare(array[last], pivot)) // last >= pivot
+        while(left < right && !compare(arr[right], pivot))
         {
-            last--;
+           right--;
         }
 
-        array[first] = array[last];
-
-        while (
-            first < last &&
-            (compare(array[first], pivot) ||
-             (!compare(array[first], pivot) && !compare(pivot, array[first])) // a<b=false && b<a=false 则代表a==b
-             ))
-        {
-            first++;
+        if(left <right) {
+             arr[left] = arr[right];
+            left++;
         }
-        array[last] = array[first];
+       
+
+        while(left < right && compare(arr[left], pivot))
+        {
+            left++;
+        }   
+
+        if(left < right) {
+            arr[right] = arr[left];
+            right--;
+        }
     }
-    array[first] = pivot;
-    return first;
+    arr[left] = pivot;
+    quickSortPartition(arr, compare, savedLeft, left-1);
+    quickSortPartition(arr, compare, left + 1, savedRight);
 }
 
-template <typename T, typename _Compare>
-void __quickSort(std::vector<T> &array, _Compare compare, size_t first, size_t last)
+// n * log2 N  -> 0(n^2)
+template <typename T, typename Compare>
+void quickSort(std::vector<T> &arr, Compare compare)
 {
-    if (first >= last)
-        return;
-    size_t pivotPos = __quickSortPartition(array, compare, first, last);
-    __quickSort(array, compare, first, pivotPos - 1);
-    __quickSort(array, compare, pivotPos + 1, last);
-}
-
-template <typename T, typename _Compare>
-void quickSort(std::vector<T> &array, _Compare compare)
-{
-    std::size_t size = array.size();
-    if (!size)
-        return;
-    __quickSort(array, compare, 0, size - 1);
+    int size = arr.size();
+    if(size == 0) return;
+    int left = 0, right = size - 1;
+    quickSortPartition(arr, compare, left, right);
 }
 
 template <typename T>
-void quickSort(std::vector<T> &array)
+void quickSort(std::vector<T> &arr)
 {
-    return quickSort(array, std::less<T>());
+    quickSort(arr, std::less<T>());
+}
+
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// 归并排序 O(n * logN)
+
+template <typename T, typename Compare>
+void mergemerge(std::vector<T> &array, Compare compare, int i, int j, int mid)
+{
+
+}
+
+template <typename T, typename Compare>
+void mergeSort0(std::vector<T> &array, Compare compare, int i, int j)
+{
+    if(i >= j) return;
+
+
+
+    int mid = (i + j) /2;
+    mergeSort0(array, compare, i, mid);
+    mergeSort0(array, compare, mid + 1, j);
+    mergemerge(array, compare, i, j, mid);
+}
+
+template <typename T, typename Compare>
+void mergeSort(std::vector<T> &array, Compare compare)
+{
+    
+}
+
+template <typename T>
+void mergeSort(std::vector<T> &array)
+{
+    mergeSort(array, std::less<T>());
 }
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-template <typename T, typename _Compare>
-void heapSort(std::vector<T> &array, _Compare compare)
-{
-    // fixme
-}
 
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// 堆排序 
 template <typename T>
 void heapSort(std::vector<T> &array)
 {

@@ -44,8 +44,8 @@ int chooseCoin_forkjoin(std::vector<int> &array, int target)
     }
 }
 
-// 动态规划
-int chooseCoin_dp(std::vector<int> array, int target, std::map<int, int> &bestCache)
+// 动态规划 with 递归
+int chooseCoin_dp(std::vector<int> &array, int target, std::map<int, int> &bestCache)
 {
     if (bestCache.find(target) != bestCache.end())
     {
@@ -71,6 +71,11 @@ int chooseCoin_dp(std::vector<int> array, int target, std::map<int, int> &bestCa
         bestCache[target] = min;
         return min;
     }
+}
+
+int chooseCoin_dp2(std::vector<int> array, int target, std::map<int, int> &bestCache)
+{
+    return 0;
 }
 
 int main(int argc, char **argv)
